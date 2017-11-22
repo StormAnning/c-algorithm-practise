@@ -1,0 +1,53 @@
+Partition Problem
+
+S={100,200,300,400,500,600,700,800,900}
+
+Say that these are the number of books in a library shelf, given 3 workers, add dividers so that each works on a portion of the shelf, and make it as fair as possible!
+
+S={100,200,300,400,500 | 600,700 | 800,900}
+
+Max amount of work for the unlucky worker who gets the largest portion = 1700.
+
+*Goal minimize the most amount of work that a single worker will have to do!
+
+//What is the last action we take to reach the final optimal state x? - We will add a single divider at position z in the given range i...j yeilding two portion lists i...z...j.
+
+M(n,k) = n = number of items. k = number of partitions!
+
+Given n items, split them up into n portions, such that we minimize the max sum obtained from the k portions.
+
+M(n,k) MINi=1->n MAX{ M(i,k-1), SUMj=i+1->n(Sj)}
+
+S={1,1,1,1,1,1,1,1,1}
+
+M(9,3)...
+S={1|1|1,1,1,1,1,1,1}
+
+When k = 1, we do not need to partition the array at all! already a 1 partition!
+
+M(9,3) = MIN
+{
+	MAX{M(1,2) , SUM(2, 9)}.  {1} {1,1,1,1,1,1,1,1}
+	MAX{M(2,2) , SUM(3, 9)}.  {1,1} {1,1,1,1,1,1,1}
+	MAX{M(3,2) , SUM(4, 9)}.  {1,1,1} {1,1,1,1,1,1}
+	MAX{M(4,2) , SUM(5, 9)}.  {1,1,1,1} {1,1,1,1,1}
+	MAX{M(5,2) , SUM(6, 9)}.  {1,1,1,1,1} {1,1,1,1}
+	MAX{M(6,2) , SUM(7, 9)}.  {1,1,1,1,1,1} {1,1,1} = MAX(3,3) = 3 //MIN Return value {1,1,1} {1,1,1} {1,1,1} 
+		//Now need to split M(6,2) {1,1,1,1,1,1} from the above
+		M(6,2) = MIN 
+		{
+			MAX{M(1,1) , SUM(2, 6)}.  {1} {1,1,1,1,1} = MAX(1,5) = 5
+			MAX{M(2,1) , SUM(3, 6)}.  {1,1} {1,1,1,1} = MAX(2,4) = 4 //k = 1 don't need to recur down no partitions
+			MAX{M(3,1) , SUM(4, 6)}.  {1,1,1} {1,1,1} = MAX(3,3) = 3 //MIN Return value {3,3} = 3:
+			MAX{M(4,1) , SUM(5, 6)}.  {1,1,1,1} {1,1} = MAX(4,2) = 4
+			MAX{M(5,1) , SUM(6, 6)}.  {1,1,1,1,1} {1} = MAX(5,1) = 5
+		}
+	MAX{M(7,2) , SUM(8, 9)}.  {1,1,1,1,1,1,1} {1,1}
+	MAX{M(8,2) , SUM(9, 9)}.  {1,1,1,1,1,1,1,1} {1}
+}
+
+//M(i,k-1) First portion of the divider
+//SUM(k+1, n) Sum of second portion of divider
+
+
+
