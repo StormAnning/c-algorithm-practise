@@ -40,8 +40,8 @@ void merge(int array[], int l, int m, int r){
   //copy items into array by comparing each unsorted smallest item of the two arrays
   int iL = 0;
   int iR = 0;
-  int k = l;
-  //RETARD THIS IS WHERE YOU ARE COPYING BACK INTO THE ARRAY! OBVIOUSLY NOT ZERO BECAUSE YOU COULD BE AT THE FUCKING RIGHT SIDE OF THE ARRAY
+  int k = l; //don't trip up and set this to 0, it is l, because you could be recursed into the right side of the array
+
   while(iL < lN && iR < rN){
     if(L[iL] <= R[iR]){
       array[k] = L[iL];
