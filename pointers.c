@@ -16,10 +16,10 @@ int main(int argc, char const *argv[])
 	pointer = &value;
 
 	printf("%d\n", *pointer); //dereferences pointer prints value
-	printf("%d\n", pointer); //prints pointer value - which is address of value!
-	printf("%d\n", &value); //prints address of value  which will be the same as the pointer above
+	printf("%p\n", pointer); //prints pointer value - which is address of value!
+	printf("%p\n", &value); //prints address of value  which will be the same as the pointer above
 
-	printf("%d\n", &pointer); //prints the address of the pointer itself - whose value actually holds an address
+	printf("%p\n", &pointer); //prints the address of the pointer itself - whose value actually holds an address
 	printf("%d\n", **&pointer); //prints the value 12
 	printf("%d\n", **&*&*&pointer); //prints the value 12
 	*pointer = 23;
@@ -35,5 +35,18 @@ int main(int argc, char const *argv[])
 
 	int *pointer2 = &value;
 
+
+	int *x; //will be allocated IN RAM
+	int *y; //both point to nothing
+	printf("%p\n", &x); //address of the pointer in RAM
+	printf("x value: %p y value:%p\n", x , y); //will print the value in ram for this pointer x, at the address above - this will not be anything useufl because we haven't set it yet, will be whatever value was last in that ram cell
+	//*x = 4; - would error
+	x = malloc(sizeof(int));
+	y = malloc(sizeof(int));
+	printf("x value: %p y value:%p\n", x , y);
+	*x = 5;
+	y=x;
+	printf("x value: %p y value:%p\n", x , y);
+	printf("%d\n", *y); //will print 5
 	return 0;
 }
